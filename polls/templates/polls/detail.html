@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票页</title>
+</head>
+<body>
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <!--按钮的值是选项的ID，按钮的名字是字符串"choice"。
+        这意味着，当你选择了其中某个按钮，并提交表单，
+        一个包含数据choice=#的POST请求将被发送到指定的url，#是被选择的选项的ID。"""
+        """forloop.counter是DJango模板系统专门提供的一个变量，
+        用来表示你当前循环的次数，一般用来给循环项目添加有序数标 -->
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" >
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
