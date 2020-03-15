@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>艺术家详解</title>
+</head>
+<body>
+{% if a %}
+    {% for per in a %}
+        <h4>{{ per.artist }} -- {{ per.name }} -- {{ per.num_stars }} -- {{ per.release_date }}</h4>
+    {% endfor %}
+
+{% else %}
+    <h4>艺术家信息暂无</h4>
+{% endif %}
+
+</body>
+</html>
